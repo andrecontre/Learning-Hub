@@ -5,9 +5,9 @@
    * [Logic with CASE](#logic-with-case)
    * [Joins](#joins)
    * [Group by](#group-by)
-* [3. Functions & Operators](#3-functions-operators)
+* [3. Functions & Operators](#3-functions-&-operators)
 * [4. Searching Text](#4-searching-text)
-* [3. Example](#3-example)
+* [3. Example](#5-example)
 
 # 1. Basic Commands
 The fundamental building blocks of every query.
