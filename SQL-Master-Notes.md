@@ -1,13 +1,17 @@
-## 📑 Table of Contents
+# Table of Contents
 * [1. Basic Commands](#1-basic-commands)
-* [2. Key Concepts Explained](#2-key-concepts-explained)
-   * [The Rules of Aliases](#the-rules-of-aliases)
+* [2. Operators](#2-operators)
+    * [Text Match](#text-match)
+* [3. Functions](#3-functions)
+    * [Aggregate Functions](#aggregate-functions-the-math-helpers)
+    * [String Functions](#string-functions)
+    * [Date Functions](#date-functions)
+* [4. Key Concepts Explained](#4-key-concepts)
+   * [Aliases](#the-rules-of-aliases)
    * [Logic with CASE](#logic-with-case)
    * [Joins](#joins)
    * [Group by](#group-by)
-* [3. Functions & Operators](#3-functions--operators)
-* [4. Searching Text](#4-searching-text)
-* [3. Example](#5-example)
+* [5. Example](#5-example)
 
 # 1. Basic Commands
 The fundamental building blocks of every query.
@@ -22,7 +26,81 @@ The fundamental building blocks of every query.
   * `ASC`: in ascending order (by default).
   * `DESC`: in descending order.
 
-## 2. Key Concepts Explained
+
+## 2. Operators
+Used in the `WHERE` clause to filter data.
+
+| Operator | Meaning |
+| :--- | :--- |
+| `=` , `!=` | Equal to , Not equal to |
+| `>`, `<` | Greater than, Less than |
+| `AND` | Both conditions must be true. |
+| `OR` | Either condition can be true. |
+| `IN (v1, v2)` | Matches any value in a list (e.g., `country IN ('Mexico', 'Canada')`). |
+| `BETWEEN x AND y` | Matches values within a range (inclusive). |
+
+### Text match
+When filtering text in your `WHERE` clause, you have two main options:
+
+| Operator | Match |
+| :--- | :--- |
+| `=`| Exact Match (includes capitalization) |
+| `LIKE` | Fuzzy Match (us the % wildcard as placeholder for anything) |
+
+```
+Exact Match: 
+WHERE country = 'France'; -- Will NOT find 'FRANCE' or 'france'
+
+Fuzzy Match:
+WHERE name LIKE :
+Starts with: 'A%' (Finds 'Apple', 'Alphabet')
+Ends with: '%ing' (Finds 'Running', 'Singing')
+Contains:'%data%' (Finds 'database', 'metadata', 'dataset')
+
+Example: Finding all emails that end in @gmail.com
+SELECT * FROM users
+WHERE email LIKE '%@gmail.com';
+
+```
+
+## 3. Functions
+### Aggregate Functions (The "Math" Helpers)
+These functions perform a calculation on a set of values and return a single value. **Remember:** These require a `GROUP BY` clause for any non-aggregated columns.
+
+| Function | Description |
+| :--- | :--- |
+| `COUNT()` | Returns the number of rows. |
+| `SUM()` | Returns the total sum of a numeric column. |
+| `AVG()` | Returns the average value. |
+| `MIN()` / `MAX()` | Returns the smallest / largest value. |
+
+---
+
+### String Functions
+Used to clean or format text data.
+
+| Function | Description |
+| :--- | :--- |
+| `UPPER(text)` / `LOWER(text)` | Converts text to all caps or all lowercase.|
+| `CONCAT(a, b)`| Joins two or more strings together (e.g., First Name + Last Name).|
+| `TRIM(text)`| Removes extra spaces from the start and end.|
+| `LENGTH(text)`| Returns the number of characters in a string.|
+|`Distinct(text)`| Returns only the distinct values in a column.|
+
+---
+
+### Date Functions
+Working with time can be tricky; these functions help extract specific parts of a date.
+
+| Function | Description |
+| :--- | :--- |
+| `CURRENT_DATE`| Returns today's date.|
+| `EXTRACT(YEAR FROM date_column)`| Pulls just the year (or month/day).|
+| `DATEDIFF(end, start)`| Calculates the number of days between two dates.|
+
+---
+
+## 4. Key Concepts
 ### The Rules of Aliases
 Aliases are "nicknames" for columns or tables.
 
@@ -57,73 +135,6 @@ Joins link tables using a shared **"Key"** .
 
 > If a column appears in your `SELECT` but is **NOT** being used in a math function (like `SUM`), it **must** be listed in your `GROUP BY` clause. If you leave one out, the query will fail.
 
-## 3. Functions & Operators
-
-### Aggregate Functions (The "Math" Helpers)
-These functions perform a calculation on a set of values and return a single value. **Remember:** These require a `GROUP BY` clause for any non-aggregated columns.
-
-| Function | Description |
-| :--- | :--- |
-| `COUNT()` | Returns the number of rows. |
-| `SUM()` | Returns the total sum of a numeric column. |
-| `AVG()` | Returns the average value. |
-| `MIN()` / `MAX()` | Returns the smallest / largest value. |
-
-
-### String Functions (Text Manipulation)
-Used to clean or format text data.
-
-* `UPPER(text)` / `LOWER(text)`: Converts text to all caps or all lowercase.
-* `CONCAT(a, b)`: Joins two or more strings together (e.g., First Name + Last Name).
-* `TRIM(text)`: Removes extra spaces from the start and end.
-* `LENGTH(text)`: Returns the number of characters in a string.
-* `Distinct(text)`: Returns only the distinct values in a column.
-
-### Date Functions
-Working with time can be tricky; these functions help extract specific parts of a date.
-
-* `CURRENT_DATE`: Returns today's date.
-* `EXTRACT(YEAR FROM date_column)`: Pulls just the year (or month/day).
-* `DATEDIFF(end, start)`: Calculates the number of days between two dates.
-
----
-
-### Comparison & Logical Operators
-Used in the `WHERE` clause to filter data.
-
-| Operator | Meaning |
-| :--- | :--- |
-| `=` , `!=` | Equal to , Not equal to |
-| `>`, `<` | Greater than, Less than |
-| `AND` | Both conditions must be true. |
-| `OR` | Either condition can be true. |
-| `IN (v1, v2)` | Matches any value in a list (e.g., `country IN ('Mexico', 'Canada')`). |
-| `BETWEEN x AND y` | Matches values within a range (inclusive). |
-
----
-## 4. Searching Text
-When filtering text in your `WHERE` clause, you have two main options:
-
-| Operator | Match |
-| :--- | :--- |
-| `=`| Exact Match (includes capitalization) |
-| `LIKE` | Fuzzy Match (us the % wildcard as placeholder for anything) |
-
-```
-Exact Match: 
-WHERE country = 'France'; -- Will NOT find 'FRANCE' or 'france'
-
-Fuzzy Match:
-WHERE name LIKE :
-Starts with: 'A%' (Finds 'Apple', 'Alphabet')
-Ends with: '%ing' (Finds 'Running', 'Singing')
-Contains:'%data%' (Finds 'database', 'metadata', 'dataset')
-
-Example: Finding all emails that end in @gmail.com
-SELECT * FROM users
-WHERE email LIKE '%@gmail.com';
-
-```
 
 ## 5. Example
 This single block shows the correct syntax order and combines Aliases, Joins, Case logic, and Grouping.
