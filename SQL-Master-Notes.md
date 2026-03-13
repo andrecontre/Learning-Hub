@@ -1,10 +1,11 @@
-# 🧠 SQL Master Notes
-> **Status:** Continuous Development
-> **Goal:** A definitive reference for advanced querying, optimization, and data modeling patterns.
+# SQL Master Notes
+* **Status:** Continuous Development
+
+* **Goal:** A definitive reference for advanced querying, optimization, and data modeling patterns.
 
 ---
 
-## 📌 Core Principles
+## Core Principles
 * Always prioritize readability over "clever" code.
 * Use CTEs for complex logic to keep the main query clean.
 * Indexing is the first step of optimization, not an afterthought.
