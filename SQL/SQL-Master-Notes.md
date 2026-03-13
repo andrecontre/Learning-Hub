@@ -20,6 +20,7 @@
     * [Aggregate Functions](#aggregate-functions-the-math-helpers)
     * [String Functions](#string-functions)
     * [Date Functions](#date-functions)
+    * [Conversion Functions](#conversion-functions)
 * [4. Key Concepts Explained](#4-key-concepts)
    * [Aliases](#the-rules-of-aliases)
    * [Logic with CASE](#logic-with-case)
@@ -31,6 +32,7 @@
 The fundamental building blocks of every query.
 
 * `SELECT`: Specifies which columns to retrieve.
+* `DISTINCT`: Removes duplicate rows from the final result set.
 * `CASE -> END`: Handles "If-Then" logic within a query.
 * `FROM`: Specifies the table to pull data from.
 * `JOIN`: Used to combine rows from two or more tables based on a related column.
@@ -88,8 +90,6 @@ These functions perform a calculation on a set of values and return a single val
 | `AVG()` | Returns the average value. |
 | `MIN()` / `MAX()` | Returns the smallest / largest value. |
 
----
-
 ### String Functions
 Used to clean or format text data.
 
@@ -99,9 +99,8 @@ Used to clean or format text data.
 | `CONCAT(a, b)`| Joins two or more strings together (e.g., First Name + Last Name).|
 | `TRIM(text)`| Removes extra spaces from the start and end.|
 | `LENGTH(text)`| Returns the number of characters in a string.|
-|`Distinct(text)`| Returns only the distinct values in a column.|
-
----
+| `REPLACE(text, old, new)`| Swaps specific characters or words with different ones. |
+| `SUBSTRING(text, start, length)`| Extracts a specific portion of text starting at a set position. |
 
 ### Date Functions
 Working with time can be tricky; these functions help extract specific parts of a date.
@@ -112,7 +111,13 @@ Working with time can be tricky; these functions help extract specific parts of 
 | `EXTRACT(YEAR FROM date_column)`| Pulls just the year (or month/day).|
 | `DATEDIFF(end, start)`| Calculates the number of days between two dates.|
 
----
+### Conversion Functions
+Used to transform data types or handle missing values.
+
+| Function | Description |
+| :--- | :--- |
+| `CAST(value AS type)` | Forces a value into a new data type (e.g., String to Integer). |
+| `COALESCE(val, replacement)` | Returns the first non-null value; used to replace `NULL` with a default. |
 
 ## 4. Key Concepts
 ### The Rules of Aliases
@@ -125,7 +130,8 @@ Aliases are "nicknames" for columns or tables.
 | **Calculations** | **Yes** | `SELECT` price * tax `AS` "Total"` |
 
 > While `AS` is technically optional in many SQL versions for columns too, using it for **Column Aliases** is best practice because it makes it clear that you are renaming something. For **Table Aliases**, most developers just write **people p** because it's faster.
----
+
+
 ### Logic with `CASE`
 The `CASE` statement is a "sandwich." You must start with `CASE` and end with `END`.
 
@@ -133,22 +139,22 @@ The `CASE` statement is a "sandwich." You must start with `CASE` and end with `E
 * **`THEN`**: The result if the condition is true.
 * **`ELSE`**: The default result if nothing matches.
 
----
-
 ### Joins
 Joins link tables using a shared **"Key"** .
 
 * **`INNER JOIN`**: Returns only the rows that have matching values in **both** tables.
 * **`LEFT JOIN`**: Returns **everything** from the Left table, plus any matches found in the Right table.
 * **`RIGHT JOIN`**: Returns **everything** from the Right table, plus any matches found in the Left table.
-
----
+* **`FULL JOIN`**: Returns **everything** from **Both Tables**. This gives all matched and unmatched records in both tables. 
 
 ### Group By
 `GROUP BY` is essential for "Math" in SQL. If you use aggregate functions like `COUNT`, `SUM`, or `AVG`, you must tell SQL which columns to "group" those totals into.
 
 > If a column appears in your `SELECT` but is **NOT** being used in a math function (like `SUM`), it **must** be listed in your `GROUP BY` clause. If you leave one out, the query will fail.
 
+### Nested Select (Subquery) 
+A query nested inside another SQL statement. It always runs first, and allows the output to serve as the input for another query.
+* Always enclosed in parentheses ( ).
 
 ## 5. Example
 This single block shows the correct syntax order and combines Aliases, Joins, Case logic, and Grouping.
@@ -170,7 +176,8 @@ FROM people p
 INNER JOIN departments d               
     ON p.dept_id = d.id                
 
-WHERE p.status = 'Active'             
+WHERE p.status = 'Active'
+AND p.salary > (SELECT AVG(salary) FROM people) 
 
 GROUP BY                               
     p.name, 
