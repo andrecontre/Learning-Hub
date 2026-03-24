@@ -1,11 +1,11 @@
 SELECT 
-    s.[product name], 
-    round(sum(CAST(s.Sales AS REAL)), 2) as ventas_totales,
-    sum(CAST(s.quantity AS INTEGER)) as total_quantity,
-    round(SUM(CAST(s.sales AS REAL))/ sum(CAST(s.quantity AS REAL)), 2) as average_price
+    s."product name" as producto, 
+    ROUND(SUM(CAST(s.Sales AS REAL)), 2) as ventas_totales,
+    SUM(CAST(s.quantity AS INTEGER)) as cantidad_vendida,
+    ROUND(SUM(CAST(s.sales AS REAL))/ SUM(CAST(s.quantity AS REAL)), 2) as precio_promedio
 FROM sales s 
 GROUP BY 
-    s.[product name]
+    s."product name"
 order BY 
     ventas_totales DESC
 LIMIT 10
