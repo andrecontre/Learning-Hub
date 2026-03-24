@@ -12,23 +12,24 @@
   
 ---
 
-# Table of Contents
+## Table of Contents
 * [1. Basic Commands](#1-basic-commands)
-* [2. Operators](#2-operators)
+* [2. Data Types](#2-data-types)
+* [3. Operators](#3-operators)
     * [Text Match](#text-match)
-* [3. Functions](#3-functions)
+* [4. Functions](#4-functions)
     * [Aggregate Functions](#aggregate-functions-the-math-helpers)
     * [String Functions](#string-functions)
     * [Date Functions](#date-functions)
     * [Conversion Functions](#conversion-functions)
-* [4. Key Concepts Explained](#4-key-concepts)
+* [5. Key Concepts Explained](#5-key-concepts)
    * [Aliases](#the-rules-of-aliases)
    * [Logic with CASE](#logic-with-case)
    * [Joins](#joins)
    * [Group by](#group-by)
-* [5. Example](#5-example)
+* [6. Example](#6-example)
 
-# 1. Basic Commands
+## 1. Basic Commands
 The fundamental building blocks of every query.
 
 * `SELECT`: Specifies which columns to retrieve.
@@ -42,8 +43,29 @@ The fundamental building blocks of every query.
   * `ASC`: in ascending order (by default).
   * `DESC`: in descending order.
 
+## 2. Data Types
 
-## 2. Operators
+### Core Data Types 
+
+| Category | SQLite Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| **Integers** | `INTEGER` | Whole numbers. Best for IDs and quantities. | `15`, `2500` |
+| **Decimals** | `REAL` | Numbers with decimals. Use for Money/Sales. | `99.95`, `0.15` |
+| **Text** | `TEXT` | Any string of characters. | `'iPhone'`, `'USA'` |
+| **Binary** | `BINARY`, `VARBINARY`, `BLOB` | "Binary Large Object". Used for images or files. | `0x1A2B3C...` |
+| **Empty** | `NULL` | Represents missing or unknown data. | `NULL` |
+
+### Dates & Time
+*SQLite stores dates as strings. Always use the ISO format for sorting.*
+
+| Format | Storage Class | Recommended ISO Format | Example |
+| :--- | :--- | :--- | :--- |
+| **Date** | `TEXT` | `'YYYY-MM-DD'` | `'2026-03-24'` |
+| **DateTime** | `TEXT` | `'YYYY-MM-DD HH:MM:SS'` | `'2026-03-24 21:00:00'` |
+
+---
+
+## 3. Operators
 Used in the `WHERE` clause to filter data.
 
 | Operator | Meaning |
@@ -79,7 +101,7 @@ WHERE email LIKE '%@gmail.com';
 
 ```
 
-## 3. Functions
+## 4. Functions
 ### Aggregate Functions (The "Math" Helpers)
 These functions perform a calculation on a set of values and return a single value. **Remember:** These require a `GROUP BY` clause for any non-aggregated columns.
 
@@ -119,7 +141,7 @@ Used to transform data types or handle missing values.
 | `CAST(value AS type)` | Forces a value into a new data type (e.g., String to Integer). |
 | `COALESCE(val, replacement)` | Returns the first non-null value; used to replace `NULL` with a default. |
 
-## 4. Key Concepts
+## 5. Key Concepts
 ### The Rules of Aliases
 Aliases are "nicknames" for columns or tables.
 
@@ -156,7 +178,7 @@ Joins link tables using a shared **"Key"** .
 A query nested inside another SQL statement. It always runs first, and allows the output to serve as the input for another query.
 * Always enclosed in parentheses ( ).
 
-## 5. Example
+## 6. Example
 This single block shows the correct syntax order and combines Aliases, Joins, Case logic, and Grouping.
 
 ```
