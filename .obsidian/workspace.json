@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "29655795511ec136",
+        "id": "7d1c03c8b8d07244",
         "type": "tabs",
         "children": [
           {
-            "id": "ab9b2d621ae11bcf",
+            "id": "0cc0b92763fde137",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "SQL/SQL-Master-Notes.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "SQL-Master-Notes"
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Working Tree)"
             }
           }
         ]
@@ -194,12 +194,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ab9b2d621ae11bcf",
+  "active": "0cc0b92763fde137",
   "lastOpenFiles": [
+    "SQL/SQL-Master-Notes.md",
     "README.md",
     "SQL/learningsql-2875059/statements.md",
     "DAX-Power-BI",
-    "SQL/SQL-Master-Notes.md",
     "SQL/SQL_Handwritten_Notes.pdf"
   ]
 }
