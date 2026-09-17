@@ -11,14 +11,14 @@
             "id": "0cc0b92763fde137",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": ".obsidian/workspace.json",
-                "bFile": ".obsidian/workspace.json",
-                "aRef": ""
+                "file": "README.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "diff",
-              "title": "Diff: workspace.json  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ]
@@ -41,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Explorador de archivos"
@@ -196,10 +198,13 @@
   },
   "active": "0cc0b92763fde137",
   "lastOpenFiles": [
-    "SQL/SQL-Master-Notes.md",
+    "lil-thumbnail-url.md",
+    "SQL/learningsql-2875059/README.md",
     "README.md",
+    "SQL/README.md",
+    "SQL/SQL-Master-Notes.md",
+    "SQL/SQL_Handwritten_Notes.pdf",
     "SQL/learningsql-2875059/statements.md",
-    "DAX-Power-BI",
-    "SQL/SQL_Handwritten_Notes.pdf"
+    "DAX-Power-BI"
   ]
 }
