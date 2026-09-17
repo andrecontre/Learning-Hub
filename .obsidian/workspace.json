@@ -158,13 +158,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SQL/SQL-Master-Notes.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de SQL-Master-Notes"
+              "title": "Esquema"
             }
           },
           {
@@ -196,11 +196,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0cc0b92763fde137",
+  "active": "bca2e5a8ac48d7db",
   "lastOpenFiles": [
     "lil-thumbnail-url.md",
-    "SQL/learningsql-2875059/README.md",
     "README.md",
+    "SQL/learningsql-2875059/README.md",
     "SQL/README.md",
     "SQL/SQL-Master-Notes.md",
     "SQL/SQL_Handwritten_Notes.pdf",
